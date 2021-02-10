@@ -22,7 +22,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Lint with flake8
-        run: flake8 --exclude tests,api/migrations,users/migrations .
+        run: flake8 --exclude tests,api/migrations,users/migrations --max-line-length 119 .
 
       - name: Test with pytest
         run: pytest tests.py 
