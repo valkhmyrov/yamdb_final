@@ -1,8 +1,6 @@
 name: yamdb_final
 
-on: [push]
-
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   tests:
