@@ -1,0 +1,12 @@
+configs
+static
+docker-compose.yaml
+Dockerfile
+pytest.ini
+run.sh
+tests
+venv
+.env*
+.git
+.gitignore
+.dockerignore
