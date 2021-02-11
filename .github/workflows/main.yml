@@ -2,9 +2,10 @@ name: yamdb_final
 
 on: [push, workflow_dispatch]
 
+env:
+  NEW_SERVER = True
+
 jobs:
-  env:
-    NEW_SERVER = True
   tests:
     runs-on: ubuntu-latest
     steps:
