@@ -64,6 +64,12 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           cd ${{ github.repository }}
+          if ! which docker; then sudo apt-get install apt-transport-https \
+            ca-certificates \
+            curl \
+            gnupg-agent \
+            software-properties-common; \
+            fi
           sudo docker-compose up .
           #sudo docker pull ${{ secrets.DOCKER_USERNAME }}/flask:latest
           #sudo docker stop $(sudo docker ps -a -q)
