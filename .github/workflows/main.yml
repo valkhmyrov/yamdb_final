@@ -2,9 +2,6 @@ name: yamdb_final
 
 on: [push, workflow_dispatch]
 
-#env:
-#  NEW_SERVER: True
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -68,9 +65,9 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           cd ${{ github.repository }}
-          if ! which docker; then touch NEW_SERVER; fi
+          if ! which docker; then touch .new_server; fi
           # Installation of Docker and Docker-Compose
-          if [ -f NEW_SERVER ]; then
+          if [ -f .new_server ]; then
             sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
             sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -80,7 +77,7 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose
           fi
           # Creation of file with secrets. Start docker-compose
-          if [ -f NEW_SERVER ]; then
+          if [ -f .new_server ]; then
             echo "DB_NAME = ${{ secrets.DB_NAME }}" > .env
             echo "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}" >> .env
             echo "POSTGRES_PASSWORD = ${{ secrets.PASSPHRASE }}" >> .env
@@ -93,6 +90,8 @@ jobs:
             sudo docker-compose up -d
           fi
           # Make migration and collect static
-          if [ -f NEW_SERVER ]; then
+          if [ -f .new_server ]; then
             python manage.py migrate
-          rm -f NEW_SERVER
+            python manage.py collectstatic
+            rm -f .new_server
+          fi
