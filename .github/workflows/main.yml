@@ -3,7 +3,7 @@ name: yamdb_final
 on: [push, workflow_dispatch]
 
 env:
-  NEW_SERVER = True
+  NEW_SERVER: True
 
 jobs:
   tests:
