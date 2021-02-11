@@ -80,9 +80,9 @@ jobs:
             sudo chmod +x /usr/local/bin/docker-compose
           fi
           # Creation of file with secrets - .env
-          echo "DB_NAME = ${DB_NAME}" > .env
-          echo "POSTGRES_USER = $POSTGRES_USER" >> .env
-          echo "POSTGRES_PASSWORD = $POSTGRES_PASSWORD" >> .env
+          echo "DB_NAME = ${{ secrets.DB_NAME }}" > .env
+          echo "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD = ${{ secrets.PASSPHRASE }}" >> .env
           echo "DB_HOST = db" >> .env
           echo "DB_PORT = 5432" >> .env
           sudo docker-compose up .
