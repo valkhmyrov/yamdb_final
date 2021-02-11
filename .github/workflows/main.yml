@@ -88,7 +88,7 @@ jobs:
             echo "DB_PORT = 5432" >> .env
             sudo docker-compose up -d
           else:
-            docker-compose pull
-            docker-compose restart
+            docker-compose down
+            docker-compose up -d
           fi
           rm -f NEW_SERVER
