@@ -66,7 +66,7 @@ jobs:
         script: |
           cd ${{ github.repository }}
           if ! which docker; then touch .new_server; fi
-          # Installation of Docker and Docker-Compose
+          echo "--- Installation of Docker and Docker-Compose ---"
           if [ -f .new_server ]; then
             sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -76,7 +76,7 @@ jobs:
               -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
           fi
-          # Creation of file with secrets. Start docker-compose
+          echo "--- Creation of file with secrets. Start docker-compose ---"
           if [ -f .new_server ]; then
             echo "DB_NAME = ${{ secrets.DB_NAME }}" > .env
             echo "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}" >> .env
@@ -89,7 +89,7 @@ jobs:
             sudo docker-compose pull
             sudo docker-compose up -d
           fi
-          # Make migration and collect static
+          echo "--- Make migration and collect static ---"
           if [ -f .new_server ]; then
             sudo docker-compose exec -T web python manage.py migrate
             sudo docker-compose exec -T web python manage.py collectstatic
@@ -98,3 +98,14 @@ jobs:
               python manage.py shell
             rm -f .new_server
           fi
+  
+  send_message:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+    - name: send message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: ${{ github.workflow }} успешно выполнен! 
