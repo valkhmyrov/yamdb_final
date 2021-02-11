@@ -91,7 +91,7 @@ jobs:
           fi
           # Make migration and collect static
           if [ -f .new_server ]; then
-            sudo docker-compose exec web python manage.py migrate
-            sudo docker-compose exec web python manage.py collectstatic
+            sudo docker-compose exec -T web python manage.py migrate
+            sudo docker-compose exec -T web python manage.py collectstatic
             rm -f .new_server
           fi
