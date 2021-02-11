@@ -79,7 +79,7 @@ jobs:
               -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
           fi
-          # Creation of file with secrets - .env
+          # Creation of file with secrets. Start docker-compose
           if [ -f NEW_SERVER ]; then
             echo "DB_NAME = ${{ secrets.DB_NAME }}" > .env
             echo "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}" >> .env
@@ -92,4 +92,7 @@ jobs:
             sudo docker-compose pull
             sudo docker-compose up -d
           fi
+          # Make migration and collect static
+          if [ -f NEW_SERVER ]; then
+            python manage.py migrate
           rm -f NEW_SERVER
