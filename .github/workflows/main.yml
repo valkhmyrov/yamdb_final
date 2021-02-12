@@ -94,9 +94,7 @@ jobs:
 
           if [ -f .new_server ]; then
             echo "--- Make migration, collect static and add superuser ---"
-            while ! nc -z db 5432; do
-              sleep 0.1
-            done
+            sudo docker-compose exec -T web while ! nc -z db 5432; do sleep 1; done
             sudo docker-compose exec -T web python manage.py migrate
             sudo docker-compose exec -T web python manage.py collectstatic
             sudo docker-compose exec -T web \
