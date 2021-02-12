@@ -1,5 +1,7 @@
 # Final task of sprint 18 - infra_sp2
 This task is an example of using infrastructure in containers. The base project is api_yamdb. It provides REST API for social network YaTube. API description is  placed in redoc.
+
+![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/yamdb_final/badge.svg)
 ## Getting Started
 ### Prerequisites
 Needed software:
@@ -40,4 +42,3 @@ cat fixtures.json | docker exec -i infra_sp2_web_1 python manage.py loaddata --f
 3. * [Fyodor-Mityanin](https://github.com/Fyodor-Mityanin) - API provides: Title, Genre, Review, Category, Comments
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/yamdb_final/badge.svg)
