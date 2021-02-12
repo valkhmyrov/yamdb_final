@@ -17,8 +17,8 @@ jobs:
           pip install -r requirements.txt
       - name: Lint with flake8
         run: flake8 --exclude tests,api/migrations,users/migrations --max-line-length 119 .
-      #- name: Test with pytest
-      #  run: pytest tests.py 
+      - name: Test with pytest
+        run: pytest tests.py 
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
@@ -43,14 +43,14 @@ jobs:
     needs: build_and_push_to_docker_hub
     steps:
     - uses: actions/checkout@master
-    - name: Copy configuration and compose files
+    - name: Coping redoc, nginx configuration and compose files
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        source: "configs/nginx.conf,docker-compose.yaml"
+        source: "static,configs/nginx.conf,docker-compose.yaml"
         target: ${{ github.repository }}
     - name: install\run docker-compose
       env:
@@ -86,22 +86,20 @@ jobs:
             echo "DB_PORT = 5432" >> .env
             sudo docker-compose up -d
           else
-            echo "--- Update images and start docker-compose ---"
+            echo "--- Updating images and starting docker-compose ---"
             sudo docker-compose down
             sudo docker-compose pull
             sudo docker-compose up -d
           fi
 
           if [ -f .new_server ]; then
-            echo "--- Make migration, collect static and add superuser ---"
-            while ! nc -z db 5432; do
-              sleep 0.1
-            done
-            sudo docker-compose exec -T web python manage.py migrate
-            sudo docker-compose exec -T web python manage.py collectstatic
-            sudo docker-compose exec -T web \
-              echo "from django.contrib.auth.models import User; User.objects.create_superuser('${{ secrets.DJANGO_ADMIN }}', '${{ secrets.DJANGO_EMAIL }}', '${{ secrets.DJANGO_PASS }}')" | \
-              python manage.py shell
+            echo "--- Making migration ---"
+            sudo docker-compose exec -T web sh -c "while ! /bin/nc -z db 5432; do echo 'DB not ready yet!'; sleep 1; done"
+            sudo docker-compose exec -T web sh -c "python manage.py migrate"
+            echo "--- Making collectstatic ---"
+            sudo docker-compose exec -T web sh -c "python manage.py collectstatic --noinput"
+            echo "--- Adding superuser ---"
+            sudo docker-compose exec -T web sh -c "echo 'from users.models import User; User.objects.create_superuser(\"${{ secrets.DJANGO_ADMIN }}\", \"${{ secrets.DJANGO_EMAIL }}\", \"${{ secrets.DJANGO_PASS }}\")' | python manage.py shell"
             rm -f .new_server
           fi
   
