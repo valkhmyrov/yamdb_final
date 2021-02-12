@@ -32,21 +32,22 @@ Needed software:
 * [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
 
 Needed secrets:
+- HOST - FQDN/IP of host
+- USER - login of user to access to host. User must have sudo permissions.
+- SSH_KEY - ssh key to host
+- PASSPHRASE - ssh passphrase to key
+- DOCKER_USERNAME - login to [hub.docker.com](https://hub.docker.com/), to put builded image
+- DOCKER_PASSWORD - password to [hub.docker.com](https://hub.docker.com/)
+- TELEGRAM_TO - ID of telegramm account, which will receive notification
+- TELEGRAM_TOKEN - token of telegramm bot, whom will send notifications
 
-DB_NAME
-DJANGO_ADMIN
-DJANGO_EMAIL
-DJANGO_PASS
-DOCKER_PASSWORD
-DOCKER_USERNAME
-HOST
-PASSPHRASE
-POSTGRES_PASSWORD
-POSTGRES_USER
-SSH_KEY
-TELEGRAM_TO
-TELEGRAM_TOKEN
-USER
+This variables will be putted to .env
+- POSTGRES_USER - login to bd
+- POSTGRES_PASSWORD - password for db
+- DB_NAME - db name
+- DJANGO_ADMIN - login of django superuser
+- DJANGO_PASS - password of django superuser
+- DJANGO_EMAIL - email of superuser
 
 ## Built With
 * [Django 3.0.5](https://www.djangoproject.com/)
@@ -55,7 +56,7 @@ USER
 * [Gunicorn 20.0.4](https://gunicorn.org/)
 * [PostgreSQL 13.1](https://www.postgresql.org/)
 ## Authors
-1. * [valkhmyrov](https://github.com/valkhmyrov) - API provides: Create users, Authentication of Users by token, User's Roles 
+1. * [valkhmyrov](https://github.com/valkhmyrov) - Workflow and API provides: Create users, Authentication of Users by token, User's Roles. 
 2. * [s4ltyk0v](https://github.com/s4ltyk0v) - API provides: Title, Genre, Review, Category, Comments
 3. * [Fyodor-Mityanin](https://github.com/Fyodor-Mityanin) - API provides: Title, Genre, Review, Category, Comments
 ## License
