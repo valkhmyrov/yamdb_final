@@ -15,12 +15,11 @@ git clone https://github.com/valkhmyrov/yamdb_final.git
 2. Change password for database in .env file
 3. Built and start project
 ```
-docker-compose up
+sudo docker-compose up
 ```
 4. Make migrations after container was built and started. First enter to web container then make migration:
 ```
-docker exec -it infra_sp2_web_1 bash
-python manage.py migrate
+sudo docker-compose exec -T web sh -c "python manage.py migrate"
 ```
 5. Create superuser. Execute command in web container, then exit.
 ```
@@ -33,6 +32,7 @@ Needed software:
 * [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
 
 Needed secrets:
+
 DB_NAME
 DJANGO_ADMIN
 DJANGO_EMAIL
