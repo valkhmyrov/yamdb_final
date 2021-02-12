@@ -32,9 +32,8 @@ Needed software:
 * [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
 
 Needed secrets:
-
-DB_NAME
-DJANGO_ADMIN
+- DB_NAME - 
+- DJANGO_ADMIN
 DJANGO_EMAIL
 DJANGO_PASS
 DOCKER_PASSWORD
