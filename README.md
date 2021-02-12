@@ -40,3 +40,4 @@ cat fixtures.json | docker exec -i infra_sp2_web_1 python manage.py loaddata --f
 3. * [Fyodor-Mityanin](https://github.com/Fyodor-Mityanin) - API provides: Title, Genre, Review, Category, Comments
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/Greet%20Everyone/badge.svg)
