@@ -97,8 +97,7 @@ jobs:
             sudo docker-compose exec -T web sh -c "while ! /bin/nc -z db 5432; do echo 'DB not ready yet!'; sleep 1; done"
             sudo docker-compose exec -T web sh -c "python manage.py migrate"
             sudo docker-compose exec -T web sh -c "python manage.py collectstatic"
-            sudo docker-compose exec -T web sh -c "echo 'from users.models import User; User.objects.create_superuser(\"${{ secrets.DJANGO_ADMIN }}", \"${{ secrets.DJANGO_EMAIL }}\", \" ${{ secrets.DJANGO_PASS }} \")' \
-              | python manage.py shell"
+            sudo docker-compose exec -T web sh -c "echo 'from users.models import User; User.objects.create_superuser(\"${{ secrets.DJANGO_ADMIN }}", \"${{ secrets.DJANGO_EMAIL }}\", \" ${{ secrets.DJANGO_PASS }} \")' | python manage.py shell"
             rm -f .new_server
           fi
   
