@@ -1,5 +1,4 @@
 configs
-static
 docker-compose.yaml
 Dockerfile
 pytest.ini
