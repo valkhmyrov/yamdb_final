@@ -43,14 +43,14 @@ jobs:
     needs: build_and_push_to_docker_hub
     steps:
     - uses: actions/checkout@master
-    - name: Copy configuration and compose files
+    - name: Coping redoc, nginx configuration and compose files
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        source: "configs/nginx.conf,docker-compose.yaml"
+        source: "static,configs/nginx.conf,docker-compose.yaml"
         target: ${{ github.repository }}
     - name: install\run docker-compose
       env:
@@ -97,7 +97,7 @@ jobs:
             sudo docker-compose exec -T web sh -c "while ! /bin/nc -z db 5432; do echo 'DB not ready yet!'; sleep 1; done"
             sudo docker-compose exec -T web sh -c "python manage.py migrate"
             echo "--- Making collectstatic ---"
-            #sudo docker-compose exec -T web sh -c "python manage.py collectstatic --noinput"
+            sudo docker-compose exec -T web sh -c "python manage.py collectstatic --noinput"
             echo "--- Adding superuser ---"
             sudo docker-compose exec -T web sh -c "echo 'from users.models import User; User.objects.create_superuser(\"${{ secrets.DJANGO_ADMIN }}\", \"${{ secrets.DJANGO_EMAIL }}\", \"${{ secrets.DJANGO_PASS }}\")' | python manage.py shell"
             rm -f .new_server
