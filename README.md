@@ -2,7 +2,7 @@
 This task is an example of using infrastructure in containers. The base project is api_yamdb. It provides REST API for social network YaTube. API description is  placed in redoc.
 
 ![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/yamdb_final/badge.svg)
-## Getting Started
+## Getting Started for manual installation
 ### Prerequisites
 Needed software:
 * [Docker](https://docs.docker.com/engine/install/) - How to install docker
@@ -10,7 +10,7 @@ Needed software:
 ### Installing
 1. Get project
 ```
-git clone https://github.com/valkhmyrov/infra_sp2.git
+git clone https://github.com/valkhmyrov/yamdb_final.git
 ```
 2. Change password for database in .env file
 3. Built and start project
@@ -26,10 +26,28 @@ python manage.py migrate
 ```
 python manage.py createsuperuser
 ```
-6. Load fixtures for example if needed. Run in host system.
-```
-cat fixtures.json | docker exec -i infra_sp2_web_1 python manage.py loaddata --format=json -
-```
+
+## Getting Started for continuous integration
+### Prerequisites
+Needed software:
+* [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
+
+Needed secrets:
+DB_NAME
+DJANGO_ADMIN
+DJANGO_EMAIL
+DJANGO_PASS
+DOCKER_PASSWORD
+DOCKER_USERNAME
+HOST
+PASSPHRASE
+POSTGRES_PASSWORD
+POSTGRES_USER
+SSH_KEY
+TELEGRAM_TO
+TELEGRAM_TOKEN
+USER
+
 ## Built With
 * [Django 3.0.5](https://www.djangoproject.com/)
 * [Django Rest Framework 3.11.0](https://www.django-rest-framework.org/)
