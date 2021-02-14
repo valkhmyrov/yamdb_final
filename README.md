@@ -13,7 +13,7 @@ Needed software:
 ```
 git clone https://github.com/valkhmyrov/yamdb_final.git
 ```
-2. Rename .env.example and change necessary variables. Change password strongly recommended!
+2. Rename .env.example and change necessary variables. Рassword change strongly recommended!
 3. Built and start project
 ```
 sudo docker-compose up
@@ -37,14 +37,15 @@ Needed software:
 * [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
 
 Needed secrets:
+- 
 - HOST - FQDN/IP of host
 - USER - login of user to access to host. User must have sudo permissions.
 - SSH_KEY - ssh key to host
 - PASSPHRASE - ssh passphrase to key
-- DOCKER_USERNAME - login to [hub.docker.com](https://hub.docker.com/), to put builded image
+- DOCKER_USERNAME - login to [hub.docker.com](https://hub.docker.com/) to put builded image
 - DOCKER_PASSWORD - password to [hub.docker.com](https://hub.docker.com/)
-- TELEGRAM_TO - ID of telegramm account, which will receive notification
-- TELEGRAM_TOKEN - token of telegramm bot, whom will send notifications
+- TELEGRAM_TO - ID of telegramm account which will receive notification
+- TELEGRAM_TOKEN - token of telegramm bot which will send notifications
 
 This variables will be putted to .env
 - POSTGRES_USER - login to bd
