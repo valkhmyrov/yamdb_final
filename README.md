@@ -2,6 +2,7 @@
 This task is an example of using infrastructure in containers. The base project is api_yamdb. It provides REST API for social network YaTube. API description is  placed in redoc.
 
 ![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/yamdb_final/badge.svg)
+Working example redoc[valkhmyrov.cf](http://valkhmyrov.cf/redoc)
 ## Getting Started for manual installation
 ### Prerequisites
 Needed software:
@@ -12,14 +13,18 @@ Needed software:
 ```
 git clone https://github.com/valkhmyrov/yamdb_final.git
 ```
-2. Change password for database in .env file
+2. Rename .env.example and change necessary variables. Change password strongly recommended!
 3. Built and start project
 ```
 sudo docker-compose up
 ```
-4. Make migrations after container was built and started. First enter to web container then make migration:
+4. Make migrations after container was built and started.
 ```
 sudo docker-compose exec -T web sh -c "python manage.py migrate"
+```
+6. Collect static.
+```
+sudo docker-compose exec -T web sh -c "python manage.py collectstatic --noinput"
 ```
 5. Create superuser. Execute command in web container, then exit.
 ```
