@@ -49,7 +49,7 @@ Needed secrets:
 - DJANGO_PASS - password of django superuser
 - DJANGO_EMAIL - email of superuser
 
-This secrets a needed to and they will be put to .env
+This secrets a needed too and they will be put to .env
 - SECRET_KEY - secret key of Django
 - POSTGRES_USER - login to bd
 - POSTGRES_PASSWORD - password for db
