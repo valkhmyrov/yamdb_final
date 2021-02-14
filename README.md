@@ -37,7 +37,6 @@ Needed software:
 * [Ubuntu](https://ubuntu.com/) - server with Ubuntu Linux
 
 Needed secrets:
-- 
 - HOST - FQDN/IP of host
 - USER - login of user to access to host. User must have sudo permissions.
 - SSH_KEY - ssh key to host
@@ -46,14 +45,16 @@ Needed secrets:
 - DOCKER_PASSWORD - password to [hub.docker.com](https://hub.docker.com/)
 - TELEGRAM_TO - ID of telegramm account which will receive notification
 - TELEGRAM_TOKEN - token of telegramm bot which will send notifications
-
-This variables will be putted to .env
-- POSTGRES_USER - login to bd
-- POSTGRES_PASSWORD - password for db
-- DB_NAME - db name
 - DJANGO_ADMIN - login of django superuser
 - DJANGO_PASS - password of django superuser
 - DJANGO_EMAIL - email of superuser
+
+This secrets a needed to and they will be put to .env
+- SECRET_KEY - secret key of Django
+- POSTGRES_USER - login to bd
+- POSTGRES_PASSWORD - password for db
+- DB_NAME - db name
+- DB_PORT - TCP port of Postgresql service
 
 ## Show example
 redoc [valkhmyrov.cf](http://valkhmyrov.cf/redoc)
