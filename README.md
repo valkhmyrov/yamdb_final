@@ -2,7 +2,7 @@
 This task is an example of using infrastructure in containers. The base project is api_yamdb. It provides REST API for social network YaTube. API description is  placed in redoc.
 
 ![example workflow name](https://github.com/valkhmyrov/yamdb_final/workflows/yamdb_final/badge.svg)
-Working example redoc[valkhmyrov.cf](http://valkhmyrov.cf/redoc)
+
 ## Getting Started for manual installation
 ### Prerequisites
 Needed software:
@@ -53,6 +53,9 @@ This variables will be putted to .env
 - DJANGO_ADMIN - login of django superuser
 - DJANGO_PASS - password of django superuser
 - DJANGO_EMAIL - email of superuser
+
+## Show example
+redoc [valkhmyrov.cf](http://valkhmyrov.cf/redoc)
 
 ## Built With
 * [Django 3.0.5](https://www.djangoproject.com/)
