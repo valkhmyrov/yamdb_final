@@ -81,12 +81,12 @@ jobs:
 
           if [ -f .new_server ]; then
             echo "--- Creation of file with secrets. Start docker-compose ---"
-            echo "SECRET_KEY = ${{ secrets.SECRET_KEY }}" > .env
-            echo "DB_NAME = ${{ secrets.DB_NAME }}" >> .env
-            echo "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}" >> .env
-            echo "POSTGRES_PASSWORD = ${{ secrets.PASSPHRASE }}" >> .env
-            echo "DB_HOST = db" >> .env
-            echo "DB_PORT = 5432" >> .env
+            echo -e "SECRET_KEY = ${{ secrets.SECRET_KEY }}\n\
+DB_NAME = ${{ secrets.DB_NAME }}\n\
+POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\n\
+POSTGRES_PASSWORD = ${{ secrets.PASSPHRASE }}\n\
+DB_HOST = db\n\
+DB_PORT = 5432" > .env
             sudo docker-compose up -d
           else
             echo "--- Updating images and starting docker-compose ---"
